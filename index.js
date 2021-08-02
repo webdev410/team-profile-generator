@@ -115,7 +115,6 @@ function addEngineer(id, name, email, github) {
                         .then((response) => {
                                 newEngineer = new Engineer(response.engId, response.engName, response.engEmail, response.engGithub)
                                 team.push(newEngineer)
-
                                 idArray.push(response.engId)
                         })
         }
