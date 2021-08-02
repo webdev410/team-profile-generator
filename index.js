@@ -77,8 +77,6 @@ const askToAdd = () => {
 }
 
 function addEngineer(id, name, email, github) {
-
-
         this.getEngineer = () => {
                 return inquirer.prompt([
                         {
@@ -117,7 +115,7 @@ function addEngineer(id, name, email, github) {
                         .then((response) => {
                                 newEngineer = new Engineer(response.engId, response.engName, response.engEmail, response.engGithub)
                                 team.push(newEngineer)
-                             
+
                                 idArray.push(response.engId)
                         })
         }
@@ -167,7 +165,7 @@ function addIntern() {
                         .then((response) => {
                                 newIntern = new Intern(response.intId, response.intName, response.intEmail, response.intSchool)
                                 team.push(newIntern)
-                                
+
                                 idArray.push(response.intId)
                         })
         }
@@ -179,7 +177,7 @@ function addIntern() {
 
 function writeToFile(response) {
         console.log('write to file function')
-        
+
         //if file location exists, write file, if not, create directory and then run the function 
         if (!fs.existsSync(OUTPUT_DIR)) {
                 fs.mkdirSync(OUTPUT_DIR)
@@ -199,4 +197,3 @@ init() // collect manager info and call asktoadd()
         // if engineer - call addEngineer()
         // if intern - call addIntern()
         // if done - write to HTML
- 

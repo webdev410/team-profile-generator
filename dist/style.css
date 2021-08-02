@@ -1,0 +1,33 @@
+.container-fluid {
+        padding: 0px;
+}
+html {
+        color: white;
+}
+.header {
+        text-align: center;
+        background-color: red;
+        color: white;
+        padding: 15px;
+}
+
+.card-body {
+        background-color: white;
+        padding: 20px 200px 20px 20px;
+        color: black;
+        
+}
+
+i {
+        margin-left: 20px;
+}
+
+span {
+        font-weight: 600;
+        margin-right: 5px
+}
+
+.row {
+    justify-content: space-evenly;
+    
+}
