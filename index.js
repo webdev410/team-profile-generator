@@ -189,11 +189,4 @@ function writeToFile(response) {
 
 
 
-init() // collect manager info and call asktoadd()
-
-// addEngineer() // collect Engineer info and call askToAdd()
-// addIntern()
-// askToAdd() // ask if engineer intern or done
-        // if engineer - call addEngineer()
-        // if intern - call addIntern()
-        // if done - write to HTML
+init()

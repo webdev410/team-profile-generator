@@ -90,7 +90,7 @@ module.exports = htmlData => {
                                         </div>
                                 </div>
                                 <div class="row mt-5" id="cardRow">
-                              ${renderteam(htmlData)}
+                                        ${renderteam(htmlData)}
                                 </div>
                         </div>
                 </header>
