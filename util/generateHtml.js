@@ -1,4 +1,4 @@
-aconst fs = require('fs')
+const fs = require('fs')
 
 const renderteam = (response) => {
         console.log('renderTeam response', response)
@@ -14,7 +14,7 @@ const renderteam = (response) => {
                         </div>
                         <div class="card-body">
                                 <p class="card-text"><span>ID: </span>${manager.getId()}</p>
-                                <p class="card-text"><span>Email: </span><a href="mailto:${manager.getEmail()}> ${manager.getEmail()}</a></p>
+                                <p class="card-text"><span>Email: </span><a href="mailto:${manager.getEmail()}"> ${manager.getEmail()}</a></p>
                                 <p class="card-text"><span>Office Number: </span>${manager.getOfficeNum()}</p>
                         </div>
                 </div>
@@ -29,7 +29,7 @@ const renderteam = (response) => {
                         </div>
                         <div class="card-body">
                                 <p class="card-text"><span>ID: </span>${intern.getId()}</p>
-                                <p class="card-text"><span>Email: </span> <a href="mailto:${intern.getEmail()}> ${intern.getEmail()}</a></p>
+                                <p class="card-text"><span>Email: </span> <a href="mailto:${intern.getEmail()}"> ${intern.getEmail()}</a></p>
                                 <p class="card-text"><span>School: </span>${intern.getSchool()}</p>
                         </div>
                 </div>                
@@ -45,8 +45,8 @@ const renderteam = (response) => {
                         </div>
                         <div class="card-body">
                                 <p class="card-text"><span>ID: </span>${engineer.getId()}</p>
-                                <p class="card-text"><span>Email: </span><a href="mailto:${engineer.getEmail()}> ${engineer.getEmail()}</a></p>
-                                <p class="card-text"><span>GitHub: </span> @${engineer.getGithub()}</p>
+                                <p class="card-text"><span>Email: </span><a href="mailto:${engineer.getEmail()}"> ${engineer.getEmail()}</a></p>
+                                <p class="card-text"><span>GitHub: </span> <a href="https://www.github.com/${engineer.getGithub()}">${engineer.getGithub()}</a></p>
                         </div>
                 </div>
                 `;
@@ -58,7 +58,6 @@ const renderteam = (response) => {
         htmlData.push(response.filter(employee => employee.getRole() === "Manager").map(data => renderManager(data)).join(""));
         htmlData.push(response.filter(employee => employee.getRole() === "Engineer").map(data => renderEngineer(data)).join(""));
         htmlData.push(response.filter(employee => employee.getRole() === "Intern").map(data => renderIntern(data)).join(""));
-        console.log('renderTeam htmlData', htmlData)
         return htmlData
 }
 
