@@ -1,16 +1,20 @@
 const inquirer = require('inquirer');
 const fs = require('fs')
-const generateHtml = require('./util/generateHtml')
-const Employee = require('./lib/employee')
-const Manager = require('./lib/manager')
-const Engineer = require('./lib/engineer')
-const Intern = require('./lib/intern')
+const path = require('path')
+const render = require('./util/generateHtml')
+const Employee = require('./lib/Employee')
+const Manager = require('./lib/Manager')
+const Engineer = require('./lib/Engineer')
+const Intern = require('./lib/Intern')
+
+const OUTPUT_DIR = path.resolve(__dirname, "output");
+const outputPath = path.join(OUTPUT_DIR, "team.html")
 const team = []
-var id = 0
+const idArray = []
 
 function init() {
         promptUser()
-                .then(() => askToAdd())
+        // .then(() => askToAdd())
         // .then(() => console.log('here'))
         //   .then((response) => writeToFile('team.html', response))
 }
@@ -19,8 +23,8 @@ const promptUser = () => {
         return inquirer.prompt([
                 {
                         type: 'input',
-                        message: 'Manager Username: ',
-                        name: 'mgrUsername',
+                        message: 'Manager Name: ',
+                        name: 'mgrName',
 
                 },
                 {
@@ -42,8 +46,13 @@ const promptUser = () => {
 
                 },
         ])
+                .then((response) => {
+                        newManager = new Manager(response.mgrId, response.mgrName, response.mgrEmail, response.mgrOfficeNum)
+                        team.push(newManager)
+                        idArray.push(response.mgrId)
+                        askToAdd()
+                })
 }
-var id = 0
 
 const askToAdd = () => {
         return inquirer.prompt([
@@ -68,12 +77,7 @@ const askToAdd = () => {
 }
 
 function addEngineer(id, name, email, github) {
-        let newEngineer
 
-        id = team.length;
-        this.name = name
-        this.email = email
-        this.github = github
 
         this.getEngineer = () => {
                 return inquirer.prompt([
@@ -84,20 +88,37 @@ function addEngineer(id, name, email, github) {
                         },
                         {
                                 type: 'input',
+                                message: 'Engineer ID: ',
+                                name: 'engId',
+                                validate: data => {
+                                        const a = data.match(/^[1-9]\d*$/)
+                                        if (a) {
+                                                if (idArray.includes(data)) {
+                                                        return "This ID is already in use. Please select a different ID."
+                                                } else {
+                                                        return true
+                                                }
+                                        }
+                                        return "ID's should be greater than zero."
+                                }
+                        },
+                        {
+                                type: 'input',
                                 message: 'Engineer Email: ',
                                 name: 'engEmail'
                         },
                         {
                                 type: 'input',
                                 message: 'GitHub Username: ',
-                                name: 'engGithub'
+                                name: 'engGithub',
                         },
 
                 ])
                         .then((response) => {
-                                newEngineer = new Engineer(id + 1, response.engName, response.engEmail, response.engGithub)
+                                newEngineer = new Engineer(response.engId, response.engName, response.engEmail, response.engGithub)
                                 team.push(newEngineer)
-                                console.log(team)
+                             
+                                idArray.push(response.engId)
                         })
         }
 
@@ -106,13 +127,30 @@ function addEngineer(id, name, email, github) {
 
 }
 function addIntern() {
-        console.log('add intern')
+        let newIntern
+        console.log('add intern function')
         this.getIntern = () => {
                 return inquirer.prompt([
                         {
                                 type: 'input',
                                 message: 'Intern Name: ',
                                 name: 'intName'
+                        },
+                        {
+                                type: 'input',
+                                message: 'Intern ID: ',
+                                name: 'intId',
+                                validate: data => {
+                                        const a = data.match(/^[1-9]\d*$/)
+                                        if (a) {
+                                                if (idArray.includes(data)) {
+                                                        return "This ID is already in use. Please select a different ID."
+                                                } else {
+                                                        return true
+                                                }
+                                        }
+                                        return "ID's should be greater than zero."
+                                }
                         },
                         {
                                 type: 'input',
@@ -127,22 +165,26 @@ function addIntern() {
 
                 ])
                         .then((response) => {
-                                console.log(response.intName)
-
-
+                                newIntern = new Intern(response.intId, response.intName, response.intEmail, response.intSchool)
+                                team.push(newIntern)
+                                
+                                idArray.push(response.intId)
                         })
         }
 
         getIntern()
-
                 .then(askToAdd)
 }
 
 
 function writeToFile(response) {
-        console.log('write to html function')
-        console.log(response)
-        // fs.writeFile(fileName, generateHtml(response), (error) => { /* handle error */ });
+        console.log('write to file function')
+        
+        //if file location exists, write file, if not, create directory and then run the function 
+        if (!fs.existsSync(OUTPUT_DIR)) {
+                fs.mkdirSync(OUTPUT_DIR)
+        }
+        fs.writeFileSync(outputPath, render(team), "utf-8");
 }
 
 
@@ -157,3 +199,4 @@ init() // collect manager info and call asktoadd()
         // if engineer - call addEngineer()
         // if intern - call addIntern()
         // if done - write to HTML
+ 
