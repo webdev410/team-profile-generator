@@ -1,6 +1,9 @@
 .container-fluid {
         padding: 0px;
 }
+h1{
+        font-size: 50px!important;
+}
 html {
         color: white;
 }
@@ -13,9 +16,13 @@ html {
 
 .card-body {
         background-color: white;
-        padding: 20px 200px 20px 20px;
+        padding: 20px 150px 20px 20px;
         color: black;
         
+}
+.card-header {
+        background-color: blue;
+        color: white;
 }
 
 i {
@@ -28,6 +35,12 @@ span {
 }
 
 .row {
-    justify-content: space-evenly;
+    justify-content: center;
     
+}
+
+.card{
+        margin: 30px;
+       box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        
 }

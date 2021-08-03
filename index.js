@@ -125,7 +125,7 @@ function addEngineer(id, name, email, github) {
 }
 function addIntern() {
         let newIntern
-        console.log('add intern function')
+   
         this.getIntern = () => {
                 return inquirer.prompt([
                         {
@@ -175,7 +175,7 @@ function addIntern() {
 
 
 function writeToFile(response) {
-        console.log('write to file function')
+        console.log('Successfully Wrote team.html')
 
         //if file location exists, write file, if not, create directory and then run the function 
         if (!fs.existsSync(OUTPUT_DIR)) {

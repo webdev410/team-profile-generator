@@ -1,7 +1,7 @@
 const fs = require('fs')
 
 const renderteam = (response) => {
-        console.log('renderTeam response', response)
+        // console.log('renderTeam response', response)
         //console.log('renderTeam manager', manager)
 
         const renderManager = manager => {
